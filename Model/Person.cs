@@ -1,6 +1,6 @@
 ﻿namespace QuorumTest.Model
 {
-    public class Legislator
+    public class Person
     {
         public int Id { get; set; }
         public string Name { get; set; }
