@@ -27,7 +27,7 @@ namespace QuorumTest.Helpers
             }
             catch (Exception e)
             {
-                Console.WriteLine("It was not possible to read the CSV file at this time. See the error stack trace below: ");
+                Console.WriteLine($"It was not possible to read the {typeof(T).Name} CSV file at this time. See the error stack trace below: ");
                 Console.WriteLine(e);
 
                 return [];
