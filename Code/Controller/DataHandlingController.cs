@@ -47,7 +47,7 @@ namespace QuorumTest.Controller
                 countCsvDto.Add(countDto);
             }
 
-            var filePath = "legislators-support-oppose-count.csv";
+            var filePath = @"CSV files\legislators-support-oppose-count.csv";
 
             CsvWriterHelper.WriteCsv(countCsvDto, filePath);
         }
@@ -94,7 +94,7 @@ namespace QuorumTest.Controller
                 billsCsvDto.Add(billsDto);
             }
 
-            var filePath = "bills.csv";
+            var filePath = @"CSV Files\bills.csv";
 
             CsvWriterHelper.WriteCsv(billsCsvDto, filePath);
         }

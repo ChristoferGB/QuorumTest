@@ -35,6 +35,7 @@ namespace QuorumTest.View
                     default:
                         executing = false;
                         Console.WriteLine("See ya!");
+                        Console.ReadKey();
                         break;
                 }
             }
