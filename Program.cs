@@ -65,7 +65,7 @@ internal class Program
 
         var filePath = "legislators-support-oppose-count.csv";
 
-        WriteCsv(countCsvDto, filePath);
+        CsvWriterHelper.WriteCsv(countCsvDto, filePath);
     }
 
     private static CountDto CreateCountDto(Person person, int suportedBills, int opposedBills)
@@ -85,12 +85,19 @@ internal class Program
 
         foreach (var bill in bills)
         {
-            var billVotesIds = votes.Where(x => x.BillId == bill.Id).Select(x => x.Id).ToList();
+            var billVotesIds = votes
+                .Where(x => x.BillId == bill.Id)
+                .Select(x => x.Id)
+                .ToList();
 
             var supportersCount = voteResults.Count(x => billVotesIds.Contains(x.VoteId) && x.VoteType == VoteType.Yea);
             var opposerCount = voteResults.Count(x => billVotesIds.Contains(x.VoteId) && x.VoteType == VoteType.Nay);
 
-            var primarySponsor = people.Where(x => x.Id == bill.PrimarySponsor).Select(x => x.Name).FirstOrDefault() ?? "Unknown";
+            var primarySponsor = people
+                .Where(x => x.Id == bill.PrimarySponsor)
+                .Select(x => x.Name)
+                .FirstOrDefault() ?? 
+                "Unknown";
 
             var billsDto = CreateBillsDto(bill, supportersCount, opposerCount, primarySponsor);
 
@@ -99,7 +106,7 @@ internal class Program
 
         var filePath = "bills.csv";
 
-        WriteCsv(billsCsvDto, filePath);
+        CsvWriterHelper.WriteCsv(billsCsvDto, filePath);
     }
 
     private static BillsDto CreateBillsDto(Bill bill, int supportersCount, int opposerCount, string primarySponsor)
@@ -112,12 +119,5 @@ internal class Program
             SupporterCount = supportersCount,
             PrimarySponsor = primarySponsor
         };
-    }
-
-    private static void WriteCsv<T>(List<T> dto, string filePath)
-    {
-        CsvWriterHelper.WriteCsv(dto, filePath);
-
-        Console.WriteLine($"CSV file created at: {Path.GetFullPath(filePath)}\n");
     }
 }
